@@ -4,7 +4,7 @@
 
 library("argparse")
 library("pROC")
-library("RColorBrewer")
+# library("RColorBrewer")
 #color=c("#8968CD","#7EC0EE","#6B8E23","#436EEE","#218868","#27408B","#7CCD7C","#CD853F","#CD4F39","#CD69C9","#FF8247","#8B0A50","#388E8E","#636363","#8B3A3A","#8B864E","#FFF0F5","#8B8386","#BFFFFF","#F08080","#7A8B8B","#8470FF","#C0FF3E")
 #color<-c(brewer.pal(12,"Set3"), brewer.pal(8,"Set2"))
 color<-c("#000000", "#FF3366", "#00CC00", "#0066CC")
