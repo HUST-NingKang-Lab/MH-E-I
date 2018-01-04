@@ -8,30 +8,33 @@ Scripts for MH(E)I (Microbial-based Human / Environment Index) classifer.
 * R libraries: argparse, pROC
 
 ## Console command line:
-### run lefse to select legacy biomarkers.
-> format_input.py input_abundance.file lefse.formatted.in -c 1 -s -1 -u 2 -o 1000000
-> run_lefse.py lefse.formatted.in lefse.lda.res -y 1 #-l $2
-> plot_res.py lefse.lda.res bar.plot.svg --format svg --dpi 300
+### Run LEfSe scripts to select legacy biomarkers. Input is the same as LEfSe. For example, Class informantion (A and B) is in the second row.
+> format_input.py input_abundance_file lefse.formatted.in -c 1 -s -1 -u 2 -o 1000000
+> Run_lefse.py lefse.formatted.in lefse.lda.res -y 1
 
-### run this script to extract and accumulate the abundance of legacy biomarkers selected by Lefse.
-> python extract_biomarkers_from_lefse.py -i lefse.lda.res -f $1
+### Run this script to extract and accumulate the abundance of legacy biomarkers selected by Lefse.
+> python extract_biomarkers_from_lefse.py -i lefse.lda.res -f input_abundance_file
 
-### run mRMR to select reprentative biomarkers from legacy biomarkers.
-> mrmr -i ${3}_biomarker.csv -m MID -n 5 -t 1 | tee ${3}_biomarker_mrmr.txt
-> mrmr -i ${4}_biomarker.csv -m MID -n 5 -t 1 | tee ${4}_biomarker_mrmr.txt
+### Run mRMR to select reprentative biomarkers from legacy biomarkers.
+###
+> mrmr -i A_biomarker.csv -m MID -n 5 -t 1 | tee A_biomarker_mrmr.txt
+> mrmr -i B_biomarker.csv -m MID -n 5 -t 1 | tee B_biomarker_mrmr.txt
 
-### run this script to extract the abundance of legacy biomarkers selected by mRMR.
-> python extract_features_from_mrmr.py -i ${3}_biomarker_mrmr.txt ${4}_biomarker_mrmr.txt -t ${3}_biomarker.csv ${4}_biomarker.csv 
+### Run this script to extract the abundance of legacy biomarkers selected by mRMR.
+> python extract_features_from_mrmr.py -i A_biomarker_mrmr.txt B_biomarker_mrmr.txt -t A_biomarker.csv B_biomarker.csv 
 
-### run this command to remove txts if they exist.
+### Run this command to remove txts if they exist.
 > rm test.txt train.txt
 
-### run this script to divide samples to train(80%) and test(20%) datasets.
->python divide28.py -f mrmr_features_abd.txt -g $5 -a $6
+### Run this script to divide samples to train(80%) and test(20%) datasets.
+### If the total abundance of biomarkers for A class is bigger than B's, the result would be better.
+>python divide28.py -f mrmr_features_abd.txt -g A -a B
 
 ### This script is used for train and test mei model.
-### MH(E)I model: MH(E)I score = (∑(i=1-n){ABU_r}(Si))/(∑(j=1-n){ABU_r}(Sj))
-> python me_h_i_model.py -f train.txt -t test.txt -g $5
+### MH(E)I model: 
+<img src="./m1.png" width = "200" height = "100" alt="linux" align=center />  
+ 
+> python me_h_i_model.py -f train.txt -t test.txt -g A
 
-# run this this script to plot ROC curve for MH(E)I
+### Run this this script to plot ROC curve for MH(E)I
 >Rscript plot_roc.R -m test_mei_list_for_roc_r.txt -f mrmr_features_abd.txt
