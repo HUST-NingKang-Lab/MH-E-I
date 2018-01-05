@@ -42,8 +42,8 @@ Scripts for MH(E)I (Microbial-based Human / Environment Index) classifer.
 > python me_h_i_model.py -f train.txt -t test.txt -g A
 
 8. Run this this script to plot ROC curve for MH(E)I
->Rscript plot_roc.R -m test_mei_list_for_roc_r.txt -f mrmr_features_abd.txt
+>Rscript plot_roc.R -m test_mei_list_for_roc_r.txt -f mrmr_features_abd.txt -n human/environment
 
 ### Auto-run script
 - If you don't want to run scripts step by step, you can use this CCL:
-> sh run.sh input_abundance_file A B A B ../
+> sh run.sh input_abundance_file A B A B niche(human/environment) path_of_scripts
