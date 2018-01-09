@@ -17,7 +17,7 @@ Workflow and principle of MH(E)I classifier. (A) Overview of MH(E)I classifier p
 ### Feature Selection
 1. Run LEfSe scripts to select legacy biomarkers. Input is the same as LEfSe. For example, Class informantion (A and B) is in the second row.
 > format_input.py input_abundance_file lefse.formatted.in -c 1 -s -1 -u 2 -o 1000000  
-> Run_lefse.py lefse.formatted.in lefse.lda.res -y 1
+> run_lefse.py lefse.formatted.in lefse.lda.res -y 1
 
 2. Run this script to extract and accumulate the abundance of legacy biomarkers selected by Lefse.
 > python extract_biomarkers_from_lefse.py -i lefse.lda.res -f input_abundance_file
